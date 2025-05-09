@@ -1,39 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import pic from "../assets/weather.jpeg";
+import weatherpic from "../assets/weatherdesign.png";
 import mint from "../assets/mint3.png";
 import clear from "../assets/clear.png";
 import thunder from "../assets/thunder.png";
 import rain from "../assets/rain.png";
 import cloud from "../assets/cloud.png";
 import snowing from "../assets/snowing.png";
-
+import { FaTemperatureArrowDown } from "react-icons/fa6";
+import { FaTemperatureArrowUp } from "react-icons/fa6";
+import { RiTempColdFill } from "react-icons/ri";
+import { WiSunrise } from "react-icons/wi";
+import { TbSunset2 } from "react-icons/tb";
+import { FaWind } from "react-icons/fa";
+import { MdOutlineWindPower } from "react-icons/md";
+import { FaWater } from "react-icons/fa";
+import { MdOutlineVisibility } from "react-icons/md";
+import { FaCloud } from "react-icons/fa";
 
 const Weather = () => {
   const inputRef = useRef();
   const [weatherData, setWeatherData] = useState(false);
-
-  // const allicon = {
-  //   "01d": "https://openweathermap.org/img/wn/01d@2x.png",
-  //   "02d": "https://openweathermap.org/img/wn/02d@2x.png",
-  //   "03d": "https://openweathermap.org/img/wn/03d@2x.png",
-  //   "04d": "https://openweathermap.org/img/wn/04d@2x.png",
-  //   "09d": "https://openweathermap.org/img/wn/09d@2x.png",
-  //   "10d": "https://openweathermap.org/img/wn/10d@2x.png",
-  //   "11d": "https://openweathermap.org/img/wn/11d@2x.png",
-  //   "13d": "https://openweathermap.org/img/wn/13d@2x.png",
-  //   "50d": "https://openweathermap.org/img/wn/50d@2x.png",
-
-  //   "01n": "https://openweathermap.org/img/wn/01n@2x.png",
-  //   "02n": "https://openweathermap.org/img/wn/02n@2x.png",
-  //   "03n": "https://openweathermap.org/img/wn/03n@2x.png",
-  //   "04n": "https://openweathermap.org/img/wn/04n@2x.png",
-  //   "09n": "https://openweathermap.org/img/wn/09n@2x.png",
-  //   "10n": "https://openweathermap.org/img/wn/10n@2x.png",
-  //   "11n": "https://openweathermap.org/img/wn/11n@2x.png",
-  //   "13n": "https://openweathermap.org/img/wn/13n@2x.png",
-  //   "50n": "https://openweathermap.org/img/wn/50n@2x.png",
-  // };
-
   const allicon = {
     "01d": clear,
     "02d": mint,
@@ -105,24 +92,25 @@ const Weather = () => {
 
   return (
     <div
-      class="h-screen bg-cover flex justify-center text-white"
-      style={{ backgroundImage: `url(${pic})` }}
+      class="h-full bg-cover flex justify-center text-white"
+      style={{ backgroundImage: `url(${weatherpic})` }}
     >
       <div
-        class="bg-black/10 backdrop-opacity-10 flex flex-col justify-center items-center w-[600px] my-7 rounded-[20%]"
+        class="h-full bg-black/10 backdrop-opacity-10 flex flex-col justify-center items-center w-[600px] my-7 py-7 rounded-[20%]"
         style={{ backgroundImage: `url(${pic})` }}
       >
-        <div class="text-3xl font-bold text-[#00029e] mb-4 ">
+        <section class="text-5xl font-bold mb-4">
           {" "}
-          WRITE YOUR CITY NAME
-        </div>
-        <div class="flex gap-2 bg-white/80 backdrop-opacity-10 text-black my-2">
+          WEATHER APP
+        </section>
+        <div class="flex bg-white/80 backdrop-opacity-10 text-black my-2">
           
             <input
-              class="border-0 p-2 text-xl font-bold uppercase text-center"
+              class="border-0 p-1 text-md font-bold text-center"
               ref={inputRef}
               type="text"
               onChange={() => search(inputRef.current.value)}
+              placeholder="Write Your City Name...."
             />
         
         </div>
@@ -133,38 +121,39 @@ const Weather = () => {
         <div class="uppercase">
           {weatherData.description}
         </div>
-        <div class="text-9xl font-bold flex ">
+        <section class="text-8xl font-bold flex ">
           {weatherData.temperature}&#176;C
-        </div>
-         
-        <div class="text-6xl font-bold text-[#00029e]">
+        </section>
+        <div class="flex items-center gap-2 mb-2">
+        <div class="flex text-5xl font-bold text-[#00029e]">
           {" "}
-          {weatherData.location}{" "}
+          {weatherData.location} 
         </div>
-        <div class="text-2xl font-bold">{weatherData.country}</div>
+        <div class="text-2xl font-bold mb-[-13px]">({weatherData.country})</div></div> 
+        {/* <div class="text-2xl font-bold">{weatherData.country}</div> */}
         <hr class="text-white border w-[400px]"/>
-        <div class="flex gap-20 mt-7">
+        <div class="flex gap-19 mt-7">
           {" "}
           <div class="text-3xl font-bold flex">{weatherData.maxtem}&#176;C</div>
-          <div class="text-3xl font-bold">{weatherData.mintem}&#176;C</div>
+          <div class="text-3xl font-bold flex">{weatherData.mintem}&#176;C</div>
         </div>
-        <div class="flex gap-20 mb-7">
+        <div class="flex gap-20 mb-4">
           {" "}
-          <div>Max-temp</div>
-          <div>Min-temp</div>
+          <div class="flex items-center gap-1"><FaTemperatureArrowDown/>Max-temp</div>
+          <div class="flex items-center gap-1"><FaTemperatureArrowUp />Min-temp</div>
         </div>
-        <div>Feel Like: {weatherData.feels_like}&#176;C</div>
-        <hr class="text-white border w-[400px]"/>
-        <div class="flex flex-wrap justify-between gap-x-10 p-4 w-[372px] ">
-          <div>Sunrise: {weatherData.formattedSunrise} am</div>
-          <div>Sunset: {weatherData.formattedSunset} pm</div>
-          <div> Wind Speed: {weatherData.Windspeed}</div>
-          <div> Pressure: {weatherData.pressure}</div>
-          <div>Sea Level: {weatherData.sea_level}</div>
-          <div>Visibility: {weatherData.visibility}</div>
-          <div>Clods: {weatherData.clouds}%</div>
+        <div class="flex items-center gap-1 text-[20px] font-bold mb-2"> <RiTempColdFill />Feel Like: {weatherData.feels_like}&#176;C</div>
+        {/* <hr class="text-white border w-[400px]"/> */}
+        <div class="flex flex-wrap justify-between gap-x-10 p-4 w-[400px] bg-[#315c7c] rounded-[20px]">
+          <div class="flex items-center gap-1"> < WiSunrise/> Sunrise: {weatherData.formattedSunrise} am</div>
+          <div class="flex items-center gap-1 "> <TbSunset2 />Sunset: {weatherData.formattedSunset} pm</div>
+          <div class="flex items-center gap-1"> <FaWind /> Wind Speed: {weatherData.Windspeed}</div>
+          <div class="flex items-center gap-1"><MdOutlineWindPower /> Pressure: {weatherData.pressure}</div>
+          <div class="flex items-center gap-1"><FaWater />Sea Level: {weatherData.sea_level}</div>
+          <div class="flex items-center gap-1"><MdOutlineVisibility /> Visibility : {weatherData.visibility}</div>
+          <div class="flex items-center gap-1"> <FaCloud />Clods: {weatherData.clouds}%</div>
         </div>
-        <hr class="text-white border w-[400px]"/>
+        {/* <hr class="text-white border w-[400px]"/> */}
       </div>
     </div>
   );
